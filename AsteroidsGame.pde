@@ -13,10 +13,10 @@ public void draw()
 }
 class SpaceShip extends Floater  
 {   
-  public Spaceship() {
+  public void Spaceship() {
 
-    myDirectionX = x;
-    myDirectionY = y;
+    myDirectionX = 3;
+    myDirectionY = 3;
     myColor = 255;
     myCenterX = 300;
     myCenterY = 300;
@@ -29,14 +29,40 @@ class SpaceShip extends Floater
     yCorners[2] = 8;
   }
   //your code here
-  public void setX(int x) {
-    myDirectionX = x;
+  public void setX(double x) {
+    myCenterX = x;
+  }
+  public double getX() {
+    return (int)myCenterX;
   }
   public void setY(int y) {
-    myDirectionY = y;
+    myCenterY = y;
   }
   public int getY() {
-    return myY;
+    return (int)myCenterY;
+  }
+  public void setDirectionX(double x) {
+    myDirectionX = x;
+  }
+  public double getDirectionX() {
+    return (int)myDirectionX;
+  }
+
+  public void setDirectionY(double y) {
+    myDirectionY = y;
+    
+  }
+
+  public double getDirectionY() {
+    return myDirectionY;
+  }
+
+  public void setPointDirection(int degrees) {
+    myPointDirection = degrees;
+  }
+
+  public double getPointDirection() {
+    return myPointDirection;
   }
 }
 
