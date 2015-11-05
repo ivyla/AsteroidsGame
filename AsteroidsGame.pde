@@ -1,38 +1,41 @@
-
-
-//your variable declarations here
+SpaceShip ship;
+PImage b;
 public void setup() 
 {
   size(700, 700);
   background(0);
-  //your code here
+   ship = new SpaceShip();
+   b = loadImage("http://cdn2.thr.com/sites/default/files/imagecache/thr_style_news_image/2015/05/ap607962860718.jpg");
 }
 public void draw() 
 {
-  //your code here
+  ship.show();
+  ship.move();
 }
-class SpaceShip extends Floater  
+ class SpaceShip extends Floater  
 {   
-  public void Spaceship() {
+  public SpaceShip() {
 
     myDirectionX = 3;
     myDirectionY = 3;
-    myColor = 255;
-    myCenterX = 300;
-    myCenterY = 300;
+    myColor = color(255);
+    myCenterX = 350;
+    myCenterY = 350;
     myPointDirection = 10;
+    corners = 3;
+    xCorners = new int[corners];
+    yCorners = new int[corners];
     xCorners[0] = -8;
     yCorners[0] = -8;
-    xCorners[1] = 16;
+    xCorners[1] = 10;
     yCorners[1] = 0;
     xCorners[2] = -8;
     yCorners[2] = 8;
   }
-  //your code here
-  public void setX(double x) {
+  public void setX(int x) {
     myCenterX = x;
   }
-  public double getX() {
+  public int getX() {
     return (int)myCenterX;
   }
   public void setY(int y) {
@@ -45,7 +48,7 @@ class SpaceShip extends Floater
     myDirectionX = x;
   }
   public double getDirectionX() {
-    return (int)myDirectionX;
+    return (double)myDirectionX;
   }
 
   public void setDirectionY(double y) {
@@ -54,7 +57,7 @@ class SpaceShip extends Floater
   }
 
   public double getDirectionY() {
-    return myDirectionY;
+    return (double)myDirectionY;
   }
 
   public void setPointDirection(int degrees) {
@@ -62,7 +65,7 @@ class SpaceShip extends Floater
   }
 
   public double getPointDirection() {
-    return myPointDirection;
+    return (double)myPointDirection;
   }
 }
 
@@ -108,7 +111,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     myCenterY += myDirectionY;     
 
     //wrap around screen    
-    if (myCenterX >width)
+    if (myCenterX > width)
     {     
       myCenterX = 0;
     } else if (myCenterX<0)
@@ -124,7 +127,8 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     }
   }   
   public void show ()  //Draws the floater at the current position  
-  {             
+  { 
+    System.out.println(corners);    
     fill(myColor);   
     stroke(myColor);    
     //convert degrees to radians for sin and cos         
@@ -139,6 +143,16 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
       vertex(xRotatedTranslated, yRotatedTranslated);
     }   
     endShape(CLOSE);
+  }
+  
+  public void keyPressed(){
+    if(keyCode == LEFT){
+  rotate();
+    }
+    if(keyCode == RIGHT){
+    rotate();
+    }
+
   }
 } 
 
