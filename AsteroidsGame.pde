@@ -118,7 +118,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     {     
       myCenterX = width;
     }    
-    if (myCenterY >height)
+    if (myCenterY > height)
     {    
       myCenterY = 0;
     } else if (myCenterY < 0)
@@ -128,7 +128,9 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   }   
   public void show ()  //Draws the floater at the current position  
   { 
-    System.out.println(corners);    
+    System.out.println(corners);
+     fill(0);
+  rect(0,0,700,700);   
     fill(myColor);   
     stroke(myColor);    
     //convert degrees to radians for sin and cos         
@@ -144,15 +146,19 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     }   
     endShape(CLOSE);
   }
-  
-  public void keyPressed(){
-    if(keyCode == LEFT){
-  rotate();
-    }
-    if(keyCode == RIGHT){
-    rotate();
-    }
 
   }
-} 
 
+
+
+  public void keyPressed(){
+    if(keyCode== LEFT){
+   ship.rotate(-10);
+    }
+    if(keyCode == RIGHT){
+    ship.rotate(10);
+    }
+    if(keyCode == UP){
+ship.accelerate(.5);
+    }
+  }
