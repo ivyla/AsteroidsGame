@@ -1,28 +1,38 @@
 SpaceShip ship;
+Star[] milkyWay = new Star[200];
 PImage b;
+
 public void setup() 
 {
   size(700, 700);
   background(0);
-   ship = new SpaceShip();
-   b = loadImage("http://cdn2.thr.com/sites/default/files/imagecache/thr_style_news_image/2015/05/ap607962860718.jpg");
+  ship = new SpaceShip();
+  b = loadImage("http://cdn2.thr.com/sites/default/files/imagecache/thr_style_news_image/2015/05/ap607962860718.jpg");
+
+  for (int i = 0; i < milkyWay.length; i++) {
+    milkyWay[i] = new Star();
+  }
 }
 public void draw() 
 {
   ship.show();
   ship.move();
+  
+  for (int nI = 0; nI < milkyWay.length; nI++){
+  milkyWay[nI].show();
+  }
 }
- class SpaceShip extends Floater  
+class SpaceShip extends Floater  
 {   
   public SpaceShip() {
 
-    myDirectionX = 3;
-    myDirectionY = 3;
+    myDirectionX = 0;
+    myDirectionY = 0;
     myColor = color(255);
     myCenterX = 350;
     myCenterY = 350;
     myPointDirection = 10;
-    corners = 3;
+    corners = 4;
     xCorners = new int[corners];
     yCorners = new int[corners];
     xCorners[0] = -8;
@@ -53,7 +63,6 @@ public void draw()
 
   public void setDirectionY(double y) {
     myDirectionY = y;
-    
   }
 
   public double getDirectionY() {
@@ -129,8 +138,8 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   public void show ()  //Draws the floater at the current position  
   { 
     System.out.println(corners);
-     fill(0);
-  rect(0,0,700,700);   
+    fill(0);
+    rect(0, 0, 700, 700);   
     fill(myColor);   
     stroke(myColor);    
     //convert degrees to radians for sin and cos         
@@ -146,19 +155,40 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     }   
     endShape(CLOSE);
   }
+}
 
+
+
+public void keyPressed() {
+  if (keyCode== LEFT) {
+    ship.rotate(-10);
   }
-
-
-
-  public void keyPressed(){
-    if(keyCode== LEFT){
-   ship.rotate(-10);
-    }
-    if(keyCode == RIGHT){
+  if (keyCode == RIGHT) {
     ship.rotate(10);
+  }
+  if (keyCode == UP) {
+    ship.accelerate(.25);
+  }
+  if (keyCode == DOWN) {
+    ship.accelerate(-.25);
+  }
+
+
+}
+
+
+ class Star {
+
+    private int myX, myY;
+
+    public Star() {
+      myX = (int)(Math.random()*500);
+      myY = (int)(Math.random()*500);
     }
-    if(keyCode == UP){
-ship.accelerate(.5);
+
+    public void show() {
+      fill(255);
+      ellipse(myX, myY, 3, 3);
     }
   }
+
