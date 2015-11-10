@@ -135,7 +135,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   }   
   public void show ()  //Draws the floater at the current position  
   { 
-    System.out.println(corners);
+ //   System.out.println(corners);
     fill(0);
     rect(0, 0, 700, 700);   
     fill(myColor);   
