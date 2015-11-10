@@ -1,13 +1,11 @@
 SpaceShip ship;
 Star[] milkyWay = new Star[200];
-PImage b;
 
 public void setup() 
 {
   size(700, 700);
   background(0);
   ship = new SpaceShip();
-  b = loadImage("http://cdn2.thr.com/sites/default/files/imagecache/thr_style_news_image/2015/05/ap607962860718.jpg");
 
   for (int i = 0; i < milkyWay.length; i++) {
     milkyWay[i] = new Star();
@@ -157,8 +155,6 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   }
 }
 
-
-
 public void keyPressed() {
   if (keyCode== LEFT) {
     ship.rotate(-10);
@@ -182,8 +178,8 @@ public void keyPressed() {
     private int myX, myY;
 
     public Star() {
-      myX = (int)(Math.random()*500);
-      myY = (int)(Math.random()*500);
+      myX = (int)(Math.random()*700);
+      myY = (int)(Math.random()*700);
     }
 
     public void show() {
