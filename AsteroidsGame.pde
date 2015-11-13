@@ -15,9 +15,9 @@ public void draw()
 {
   ship.show();
   ship.move();
-  
-  for (int nI = 0; nI < milkyWay.length; nI++){
-  milkyWay[nI].show();
+
+  for (int nI = 0; nI < milkyWay.length; nI++) {
+    milkyWay[nI].show();
   }
 }
 class SpaceShip extends Floater  
@@ -135,7 +135,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   }   
   public void show ()  //Draws the floater at the current position  
   { 
- //   System.out.println(corners);
+    //   System.out.println(corners);
     fill(0);
     rect(0, 0, 700, 700);   
     fill(myColor);   
@@ -168,23 +168,75 @@ public void keyPressed() {
   if (keyCode == DOWN) {
     ship.accelerate(-.25);
   }
-
-
 }
 
 
- class Star {
+class Star {
 
-    private int myX, myY;
+  private int myX, myY;
 
-    public Star() {
-      myX = (int)(Math.random()*700);
-      myY = (int)(Math.random()*700);
-    }
-
-    public void show() {
-      fill(255);
-      ellipse(myX, myY, 3, 3);
-    }
+  public Star() {
+    myX = (int)(Math.random()*700);
+    myY = (int)(Math.random()*700);
   }
 
+  public void show() {
+    fill(255);
+    ellipse(myX, myY, 3, 3);
+  }
+}
+
+class Asteroid extends Floater {
+
+  int rotSpeed;
+
+  public Asteroid() {
+
+    public void setX(int x) {
+      myCenterX = x;
+    }
+    public int getX() {
+      return (int)myCenterX;
+    }
+    public void setY(int y) {
+      myCenterY = y;
+    }
+    public int getY() {
+      return (int)myCenterY;
+    }
+    public void setDirectionX(double x) {
+      myDirectionX = x;
+    }
+    public double getDirectionX() {
+      return (double)myDirectionX;
+    }
+
+    public void setDirectionY(double y) {
+      myDirectionY = y;
+    }
+
+    public double getDirectionY() {
+      return (double)myDirectionY;
+    }
+
+    public void setPointDirection(int degrees) {
+      myPointDirection = degrees;
+    }
+
+    public double getPointDirection() {
+      return (double)myPointDirection;
+    }
+    
+    
+  }
+  
+}
+
+public void move() {
+
+  super.move();
+}
+
+
+
+}
