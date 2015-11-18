@@ -163,14 +163,17 @@ public void keyPressed() {
     ship.rotate(10);
   }
   if (keyCode == UP) {
-    ship.accelerate(.25);
+    ship.accelerate(.50);
   }
   if (keyCode == DOWN) {
-    ship.accelerate(-.25);
+    ship.accelerate(-.50);
   }
-  if(key = 'H'){
+  if(key == 'h'){
   
+     ship.setX((int)(Math.random()*700));
+  ship.setY((int)(Math.random()*700));
   
+  ship.setDirectionX((int));
   }
   
 }
