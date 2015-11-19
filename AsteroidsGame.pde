@@ -173,7 +173,11 @@ public void keyPressed() {
      ship.setX((int)(Math.random()*700));
   ship.setY((int)(Math.random()*700));
   
-  ship.setDirectionX((int));
+  ship.setDirectionX(0);
+  ship.setDirectionY(0);
+  
+  ship.setPointDirection((int)(Math.random()*360));
+  
   }
   
 }
