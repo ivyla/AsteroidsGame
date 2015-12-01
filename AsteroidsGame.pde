@@ -1,6 +1,6 @@
 SpaceShip ship;
 Star[] milkyWay = new Star[200];
-//Asteroid[] roids = new Asteroid[100];
+Asteroid[] roids = new Asteroid[30];
 Asteroid roid = new Asteroid();
 
 public void setup() 
@@ -13,11 +13,11 @@ public void setup()
     milkyWay[i] = new Star();
   }
   
-//  for (int j = 0; j < roids.length; j++){
-//  
-//    roids[j] = new Asteroid();
-//  
-//  }
+  for (int j = 0; j < roids.length; j++){
+  
+   roids[j] = new Asteroid();
+ 
+  }
   
 }
 public void draw() 
@@ -30,13 +30,15 @@ public void draw()
   roid.show();
   roid.move();
 
-  for (int nI = 0; nI < milkyWay.length; nI++) {
-    milkyWay[nI].show();
-  }
-  
-//  for (int pI = 0; pI < roids.length; pI++){
-//  roids[pI].show();
+//  for (int nI = 0; nI < milkyWay.length; nI++) {
+//    milkyWay[nI].show();
+//    milkyWay[nI].move();
 //  }
+  
+ for (int pI = 0; pI < roids.length; pI++){
+ roids[pI].show();
+ roids[pI].move();
+  }
 }
 class SpaceShip extends Floater  
 {   
@@ -237,10 +239,9 @@ class Asteroid extends Floater {
     corners = 6;
     xCorners = new int[corners];
     yCorners = new int[corners];
-    xCorners[0] = -8;
+   xCorners[0] = -8;
     yCorners[0] = -12;
     xCorners[1] = 15;
-    yCorners[1] = -8;
     xCorners[2] = 7;
     yCorners[2] = -13;
     xCorners[3] = 5;
@@ -249,7 +250,7 @@ class Asteroid extends Floater {
     yCorners[4] = 3;
     xCorners[5] = -10;
     yCorners[5] = -6;
-  rotSpeed = (int)(Math.random()*3);
+  rotSpeed = (int)(Math.random()*3)+1;
 
   }
     
@@ -300,10 +301,10 @@ class Asteroid extends Floater {
 
 
 
-void keyReleased(){
-ship.setDirectionX(-.02);
-ship.setDirectionY(-.02);
-}
+//void keyReleased(){
+//ship.setDirectionX(-.02);
+//ship.setDirectionY(-.02);
+//}
 
 
 
