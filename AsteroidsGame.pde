@@ -25,7 +25,7 @@ public void draw()
   background(0);
   ship.show();
   ship.move();
-  System.out.println(ship.getX() + ", " + ship.getY() );
+ // System.out.println(ship.getX() + ", " + ship.getY() );
   
   roid.show();
   roid.move();
