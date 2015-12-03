@@ -1,3 +1,5 @@
+// bob.setdirectionX(0);
+
 SpaceShip ship;
 Star[] milkyWay = new Star[200];
 Asteroid[] roids = new Asteroid[30];
@@ -9,15 +11,17 @@ public void setup()
   background(0);
   ship = new SpaceShip();
 
-  for (int i = 0; i < milkyWay.length; i++) {
-    milkyWay[i] = new Star();
-  }
-  
+
   for (int j = 0; j < roids.length; j++){
   
    roids[j] = new Asteroid();
  
   }
+  
+    for (int i = 0; i < milkyWay.length; i++) {
+    milkyWay[i] = new Star();
+  }
+  
   
 }
 public void draw() 
@@ -30,10 +34,10 @@ public void draw()
   roid.show();
   roid.move();
 
-//  for (int nI = 0; nI < milkyWay.length; nI++) {
-//    milkyWay[nI].show();
+  for (int nI = 0; nI < milkyWay.length; nI++) {
+    milkyWay[nI].show();
 //    milkyWay[nI].move();
-//  }
+  }
   
  for (int pI = 0; pI < roids.length; pI++){
  roids[pI].show();
