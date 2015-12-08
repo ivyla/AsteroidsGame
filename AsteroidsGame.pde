@@ -2,8 +2,9 @@
 
 SpaceShip ship;
 Star[] milkyWay = new Star[200];
-Asteroid[] roids = new Asteroid[30];
+//Asteroid[] roids = new Asteroid[15];
 Asteroid roid = new Asteroid();
+ArrayList <Asteroid> roidz;
 
 public void setup() 
 {
@@ -11,12 +12,17 @@ public void setup()
   background(0);
   ship = new SpaceShip();
 
+roidz = new ArrayList <Asteroid>();
+for(int i =0; i<20; i++){
+  roidz.add(new Asteroid());
+}
 
-  for (int j = 0; j < roids.length; j++){
+//Asteroid roidz = new Asteroid(30);
+  //for (int j = 0; j < roids.length; j++){
   
-   roids[j] = new Asteroid();
+   //roids[j] = new Asteroid();
  
-  }
+ // }
   
     for (int i = 0; i < milkyWay.length; i++) {
     milkyWay[i] = new Star();
@@ -39,9 +45,9 @@ public void draw()
 //    milkyWay[nI].move();
   }
   
- for (int pI = 0; pI < roids.length; pI++){
- roids[pI].show();
- roids[pI].move();
+ for (int pI = 0; pI < roidz.size(); pI++){
+ roidz.get(pI).show();
+ roidz.get(pI).move();
   }
 }
 class SpaceShip extends Floater  
@@ -64,6 +70,7 @@ class SpaceShip extends Floater
     xCorners[2] = -8;
     yCorners[2] = 8;
   }
+ 
   public void setX(int x) {
     myCenterX = x;
   }
@@ -98,6 +105,7 @@ class SpaceShip extends Floater
   public double getPointDirection() {
     return (double)myPointDirection;
   }
+  
 }
 
 
@@ -162,9 +170,10 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     //   System.out.println(corners);
 //    fill(0);
 //    rect(0, 0, 700, 700);   
-//    fill(myColor);   
-//    stroke(myColor);    
-    //convert degrees to radians for sin and cos         
+      fill(myColor);   
+ stroke(myColor);    
+    //convert degrees to radians for sin and cos     
+   // color(myColor);    
     double dRadians = myPointDirection*(Math.PI/180);                 
     int xRotatedTranslated, yRotatedTranslated;    
     beginShape();         
@@ -181,10 +190,10 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
 
 public void keyPressed() {
   if (keyCode== LEFT) {
-    ship.rotate(-10);
+    ship.rotate(-20);
   }
   if (keyCode == RIGHT) {
-    ship.rotate(10);
+    ship.rotate(20);
   }
   if (keyCode == UP) {
     ship.accelerate(.50);
@@ -212,17 +221,24 @@ class Star {
 
   private int myX, myY;
   private int myX2, myY2;
-  private int r, g, b;
+  public int r, g, b;
+  private int starColor;
 
   public Star() {
     myX = (int)(Math.random()*800);
     myY = (int)(Math.random()*800);
+    r = 266;
+    g = 24;
+    b = 255;
     
   }
 
   public void show() {
-    fill(0,255,0);
     noStroke();
+
+    fill(r,g,b);
+
+    
     ellipse(myX, myY, 2, 2);
 
   }
@@ -236,24 +252,25 @@ class Asteroid extends Floater {
     
         myDirectionX = (int)(Math.random()*5)-2;
     myDirectionY = (int)(Math.random()*5)-2;
-    myColor = color(255);
+    myColor = color(130,86,0);
     myCenterX = (int)(Math.random()*700);
     myCenterY = (int)(Math.random()*700);
     myPointDirection = 10;
     corners = 6;
     xCorners = new int[corners];
     yCorners = new int[corners];
-   xCorners[0] = -8;
-    yCorners[0] = -12;
-    xCorners[1] = 15;
-    xCorners[2] = 7;
-    yCorners[2] = -13;
-    xCorners[3] = 5;
-    yCorners[3] = 15;
-    xCorners[4] = -5;
-    yCorners[4] = 3;
-    xCorners[5] = -10;
-    yCorners[5] = -6;
+xCorners[0] = -11;
+yCorners[0] = -8;
+xCorners[1] = 7;
+yCorners[1] = -8;
+xCorners[2] = 13;
+yCorners[2] = 0;
+xCorners[3] = 6;
+yCorners[3] = 10;
+xCorners[4] = -11;
+yCorners[4] = 8;
+xCorners[5] = -5;
+yCorners[5] = 0;
   rotSpeed = (int)(Math.random()*3)+1;
 
   }
@@ -305,10 +322,10 @@ class Asteroid extends Floater {
 
 
 
-//void keyReleased(){
-//ship.setDirectionX(-.02);
-//ship.setDirectionY(-.02);
-//}
+void keyReleased(){
+ship.setDirectionX(0);
+ship.setDirectionY(0);
+}
 
 
 
