@@ -48,7 +48,13 @@ public void draw()
  for (int pI = 0; pI < roidz.size(); pI++){
  roidz.get(pI).show();
  roidz.get(pI).move();
+ 
+ if(dist((float)ship.myCenterX, (float)ship.myCenterY, (float)roidz.get(pI).getX(), (float)roidz.get(pI).getY()) < 20){
+ roidz.remove(roidz.get(pI));
+ 
   }
+}
+
 }
 class SpaceShip extends Floater  
 {   
@@ -322,10 +328,10 @@ yCorners[5] = 0;
 
 
 
-void keyReleased(){
-ship.setDirectionX(0);
-ship.setDirectionY(0);
-}
+//void keyReleased(){
+//ship.setDirectionX(0);
+//ship.setDirectionY(0);
+//}
 
 
 
