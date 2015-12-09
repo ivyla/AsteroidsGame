@@ -9,7 +9,7 @@ ArrayList <Asteroid> roidz;
 public void setup() 
 {
   size(700, 700);
-  background(0);
+  background(0,33,127);
   ship = new SpaceShip();
 
 roidz = new ArrayList <Asteroid>();
@@ -326,6 +326,50 @@ yCorners[5] = 0;
 
 }
 
+class Bullet extends Floater {
+
+public Bullet(){
+
+myCenterX = ship.myCenterX;
+}
+
+  public void setX(int x) {
+    myCenterX = x;
+  }
+  public int getX() {
+    return (int)myCenterX;
+  }
+  public void setY(int y) {
+    myCenterY = y;
+  }
+  public int getY() {
+    return (int)myCenterY;
+  }
+  public void setDirectionX(double x) {
+    myDirectionX = x;
+  }
+  public double getDirectionX() {
+    return (double)myDirectionX;
+  }
+
+  public void setDirectionY(double y) {
+    myDirectionY = y;
+  }
+
+  public double getDirectionY() {
+    return (double)myDirectionY;
+  }
+
+  public void setPointDirection(int degrees) {
+    myPointDirection = degrees;
+  }
+
+  public double getPointDirection() {
+    return (double)myPointDirection;
+  }
+  
+
+}
 
 
 //void keyReleased(){
