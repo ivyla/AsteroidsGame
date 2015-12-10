@@ -1,60 +1,76 @@
 // bob.setdirectionX(0);
 
-SpaceShip ship;
+SpaceShip ship = new SpaceShip();
 Star[] milkyWay = new Star[200];
 //Asteroid[] roids = new Asteroid[15];
 Asteroid roid = new Asteroid();
 ArrayList <Asteroid> roidz;
+Bullet bull = new Bullet(ship);
+ArrayList <Bullet> bullz;
+
 
 public void setup() 
 {
   size(700, 700);
-  background(0,33,127);
-  ship = new SpaceShip();
+  background(0, 33, 127);
+  
 
-roidz = new ArrayList <Asteroid>();
-for(int i =0; i<20; i++){
-  roidz.add(new Asteroid());
-}
+  roidz = new ArrayList <Asteroid>();
+  for (int i =0; i<20; i++) {
+    roidz.add(new Asteroid());
+  }
 
-//Asteroid roidz = new Asteroid(30);
+  bullz = new ArrayList <Bullet>();
+
+  for (int m = 0; m < bullz.size (); m++) {
+
+    bullz.add(new Bullet(ship));
+  }
+
+
+  //Asteroid roidz = new Asteroid(30);
   //for (int j = 0; j < roids.length; j++){
-  
-   //roids[j] = new Asteroid();
- 
- // }
-  
-    for (int i = 0; i < milkyWay.length; i++) {
+
+  //roids[j] = new Asteroid();
+
+  // }
+
+  for (int i = 0; i < milkyWay.length; i++) {
     milkyWay[i] = new Star();
   }
-  
-  
 }
 public void draw() 
 {
   background(0);
   ship.show();
   ship.move();
- // System.out.println(ship.getX() + ", " + ship.getY() );
-  
+  // System.out.println(ship.getX() + ", " + ship.getY() );
+
   roid.show();
   roid.move();
 
+  bull.show();
+  bull.move();
+
   for (int nI = 0; nI < milkyWay.length; nI++) {
     milkyWay[nI].show();
-//    milkyWay[nI].move();
+    //    milkyWay[nI].move();
   }
-  
- for (int pI = 0; pI < roidz.size(); pI++){
- roidz.get(pI).show();
- roidz.get(pI).move();
- 
- if(dist((float)ship.myCenterX, (float)ship.myCenterY, (float)roidz.get(pI).getX(), (float)roidz.get(pI).getY()) < 20){
- roidz.remove(roidz.get(pI));
- 
-  }
-}
 
+  for (int pI = 0; pI < roidz.size (); pI++) {
+    roidz.get(pI).show();
+    roidz.get(pI).move();
+
+    if (dist((float)ship.myCenterX, (float)ship.myCenterY, (float)roidz.get(pI).getX(), (float)roidz.get(pI).getY()) < 20) {
+      roidz.remove(roidz.get(pI));
+    }
+  }
+
+  for (int w = 0; w < bullz.size (); w++) {
+
+    bullz.get(w).show();
+    bullz.get(w).move();
+  }
 }
 class SpaceShip extends Floater  
 {   
@@ -76,7 +92,7 @@ class SpaceShip extends Floater
     xCorners[2] = -8;
     yCorners[2] = 8;
   }
- 
+
   public void setX(int x) {
     myCenterX = x;
   }
@@ -111,7 +127,6 @@ class SpaceShip extends Floater
   public double getPointDirection() {
     return (double)myPointDirection;
   }
-  
 }
 
 
@@ -174,12 +189,12 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   public void show ()  //Draws the floater at the current position  
   { 
     //   System.out.println(corners);
-//    fill(0);
-//    rect(0, 0, 700, 700);   
-      fill(myColor);   
- stroke(myColor);    
+    //    fill(0);
+    //    rect(0, 0, 700, 700);   
+    fill(myColor);   
+    stroke(myColor);    
     //convert degrees to radians for sin and cos     
-   // color(myColor);    
+    // color(myColor);    
     double dRadians = myPointDirection*(Math.PI/180);                 
     int xRotatedTranslated, yRotatedTranslated;    
     beginShape();         
@@ -207,19 +222,21 @@ public void keyPressed() {
   if (keyCode == DOWN) {
     ship.accelerate(-.50);
   }
-  if(key == 'h'){
-  
-     ship.setX((int)(Math.random()*700));
-  ship.setY((int)(Math.random()*700));
-  
-  ship.setDirectionX(0);
-  ship.setDirectionY(0);
-  
-  ship.setPointDirection((int)(Math.random()*360));
-  
+  if (key == 'h') {
+
+    ship.setX((int)(Math.random()*700));
+    ship.setY((int)(Math.random()*700));
+
+    ship.setDirectionX(0);
+    ship.setDirectionY(0);
+
+    ship.setPointDirection((int)(Math.random()*360));
   }
-  
-  
+
+  if (keyCode == 32) {
+
+    bullz.add(new Bullet(ship));
+  }
 }
 
 
@@ -236,17 +253,15 @@ class Star {
     r = 266;
     g = 24;
     b = 255;
-    
   }
 
   public void show() {
     noStroke();
 
-    fill(r,g,b);
+    fill(r, g, b);
 
-    
+
     ellipse(myX, myY, 2, 2);
-
   }
 }
 
@@ -255,32 +270,31 @@ class Asteroid extends Floater {
   private int rotSpeed;
 
   public Asteroid() {
-    
-        myDirectionX = (int)(Math.random()*5)-2;
+
+    myDirectionX = (int)(Math.random()*5)-2;
     myDirectionY = (int)(Math.random()*5)-2;
-    myColor = color(130,86,0);
+    myColor = color(130, 86, 0);
     myCenterX = (int)(Math.random()*700);
     myCenterY = (int)(Math.random()*700);
     myPointDirection = 10;
     corners = 6;
     xCorners = new int[corners];
     yCorners = new int[corners];
-xCorners[0] = -11;
-yCorners[0] = -8;
-xCorners[1] = 7;
-yCorners[1] = -8;
-xCorners[2] = 13;
-yCorners[2] = 0;
-xCorners[3] = 6;
-yCorners[3] = 10;
-xCorners[4] = -11;
-yCorners[4] = 8;
-xCorners[5] = -5;
-yCorners[5] = 0;
-  rotSpeed = (int)(Math.random()*3)+1;
-
+    xCorners[0] = -11;
+    yCorners[0] = -8;
+    xCorners[1] = 7;
+    yCorners[1] = -8;
+    xCorners[2] = 13;
+    yCorners[2] = 0;
+    xCorners[3] = 6;
+    yCorners[3] = 10;
+    xCorners[4] = -11;
+    yCorners[4] = 8;
+    xCorners[5] = -5;
+    yCorners[5] = 0;
+    rotSpeed = (int)(Math.random()*3)+1;
   }
-    
+
   public void setX(int x) {
     myCenterX = x;
   }
@@ -315,23 +329,26 @@ yCorners[5] = 0;
   public double getPointDirection() {
     return (double)myPointDirection;
   }
-  
-  public void move(){
-  
-  rotate(rotSpeed);
-  super.move();
+
+  public void move() {
+
+    rotate(rotSpeed);
+    super.move();
   }
-  
-
-
 }
 
 class Bullet extends Floater {
 
-public Bullet(){
 
-myCenterX = ship.myCenterX;
-}
+  public Bullet(SpaceShip ship) {
+
+    myCenterX = ship.getX();
+    myCenterY = ship.getY();
+    myPointDirection = ship.getPointDirection();
+    double dRadians =myPointDirection*(Math.PI/180);
+    myDirectionX = (5 * Math.cos(dRadians) + ship.getDirectionX());
+    myDirectionY = (5 * Math.sin(dRadians) + ship.getDirectionY());
+  }
 
   public void setX(int x) {
     myCenterX = x;
@@ -367,8 +384,13 @@ myCenterX = ship.myCenterX;
   public double getPointDirection() {
     return (double)myPointDirection;
   }
-  
 
+
+  public void show()
+  {
+    fill(255, 0, 0);
+    ellipse((int)ship.myCenterX, (int)ship.myCenterY, 10, 10);
+  }
 }
 
 
@@ -376,6 +398,5 @@ myCenterX = ship.myCenterX;
 //ship.setDirectionX(0);
 //ship.setDirectionY(0);
 //}
-
 
 
