@@ -7,7 +7,7 @@ Asteroid roid = new Asteroid();
 ArrayList <Asteroid> roidz;
 Bullet bull = new Bullet(ship);
 ArrayList <Bullet> bullz;
-
+boolean left, right, acc, dec, shooting = false;
 
 public void setup() 
 {
@@ -22,10 +22,10 @@ public void setup()
 
   bullz = new ArrayList <Bullet>();
 
-  for (int m = 0; m < bullz.size (); m++) {
-
-    bullz.add(new Bullet(ship));
-  }
+//  for (int m = 0; m < bullz.size (); m++) {
+//
+//    bullz.add(new Bullet(ship));
+//  }
 
 
   //Asteroid roidz = new Asteroid(30);
@@ -70,7 +70,22 @@ public void draw()
 
     bullz.get(w).show();
     bullz.get(w).move();
+    //loop through asteroids
+    
+    for(int p = 0; p < bullz.size(); p++){
+    
+      if(dist((float)roidz.get(p).myCenterX, (float)roidz.get(p).myCenterY, (float)bullz.get(p).getX(), (float)bullz.get(p).getY()) < 20){
+      roidz.remove(roidz.get(p));
+      break;
+      
+      }
+    
+    }
   }
+  
+  if(right == true){ a }
+  
+  
 }
 class SpaceShip extends Floater  
 {   
@@ -152,7 +167,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
 
   //Accelerates the floater in the direction it is pointing (myPointDirection)   
   public void accelerate (double dAmount)   
-  {          
+  {         
     //convert the current direction the floater is pointing to radians    
     double dRadians =myPointDirection*(Math.PI/180);     
     //change coordinates of direction of travel    
@@ -212,15 +227,19 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
 public void keyPressed() {
   if (keyCode== LEFT) {
     ship.rotate(-20);
+    left = true;
   }
   if (keyCode == RIGHT) {
     ship.rotate(20);
+    right = true;
   }
   if (keyCode == UP) {
     ship.accelerate(.50);
+    acc = true;
   }
   if (keyCode == DOWN) {
     ship.accelerate(-.50);
+    dec = true;
   }
   if (key == 'h') {
 
@@ -231,12 +250,20 @@ public void keyPressed() {
     ship.setDirectionY(0);
 
     ship.setPointDirection((int)(Math.random()*360));
+    moving = true;
   }
 
-  if (keyCode == 32) {
+  if (key == 'k') {
 
     bullz.add(new Bullet(ship));
   }
+  
+public void keyReleased(){
+
+if(keyCode == left){
+left = false;
+}
+
 }
 
 
@@ -388,15 +415,16 @@ class Bullet extends Floater {
 
   public void show()
   {
+    stroke(255);
     fill(255, 0, 0);
-    ellipse((int)ship.myCenterX, (int)ship.myCenterY, 10, 10);
+    ellipse((int)myCenterX, (int)myCenterY, 7, 7);
+  }
+  
+  public void move(){
+      myCenterX += myDirectionX;    
+    myCenterY += myDirectionY;     
+
   }
 }
-
-
-//void keyReleased(){
-//ship.setDirectionX(0);
-//ship.setDirectionY(0);
-//}
 
 
